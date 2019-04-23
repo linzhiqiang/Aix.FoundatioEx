@@ -2604,11 +2604,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\coding\\Aix\\Aix.FoundatioEx\\Tests\\KafkaTester\\KafkaTester.csproj",
+      "projectUniqueName": "F:\\github\\my\\Aix.FoundatioEx\\Tests\\KafkaTester\\KafkaTester.csproj",
       "projectName": "KafkaTester",
-      "projectPath": "F:\\coding\\Aix\\Aix.FoundatioEx\\Tests\\KafkaTester\\KafkaTester.csproj",
+      "projectPath": "F:\\github\\my\\Aix.FoundatioEx\\Tests\\KafkaTester\\KafkaTester.csproj",
       "packagesPath": "C:\\Users\\linzhiqiang\\.nuget\\packages\\",
-      "outputPath": "F:\\coding\\Aix\\Aix.FoundatioEx\\Tests\\KafkaTester\\obj\\",
+      "outputPath": "F:\\github\\my\\Aix.FoundatioEx\\Tests\\KafkaTester\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -2627,8 +2627,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "F:\\coding\\Aix\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj": {
-              "projectPath": "F:\\coding\\Aix\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj"
+            "F:\\github\\my\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj": {
+              "projectPath": "F:\\github\\my\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj"
             }
           }
         }

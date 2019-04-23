@@ -11,8 +11,8 @@
     <Description>Foundatio的MessageBus的kafka实现
 支持手工提交offset模式
 支持单topic和多topic模式(所有类型消息存储在单个topic或者多个topic)</Description>
-    <PackageProjectUrl>https://coding.net/u/linzhiqiang/p/Aix/git</PackageProjectUrl>
-    <RepositoryUrl>https://coding.net/u/linzhiqiang/p/Aix/git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

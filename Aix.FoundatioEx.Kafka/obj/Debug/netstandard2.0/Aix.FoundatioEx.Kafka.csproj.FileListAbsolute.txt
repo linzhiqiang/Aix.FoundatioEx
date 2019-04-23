@@ -7,3 +7,12 @@ F:\coding\Aix\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix
 F:\coding\Aix\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.dll
 F:\coding\Aix\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.pdb
 F:\coding\Aix\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.csprojAssemblyReference.cache
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\bin\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.deps.json
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\bin\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.dll
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\bin\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.pdb
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.csprojAssemblyReference.cache
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.csproj.CoreCompileInputs.cache
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.AssemblyInfoInputs.cache
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.AssemblyInfo.cs
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.dll
+F:\github\my\Aix.FoundatioEx\Aix.FoundatioEx.Kafka\obj\Debug\netstandard2.0\Aix.FoundatioEx.Kafka.pdb

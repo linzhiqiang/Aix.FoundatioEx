@@ -2263,11 +2263,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\coding\\Aix\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj",
+      "projectUniqueName": "F:\\github\\my\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj",
       "projectName": "Aix.FoundatioEx.Kafka",
-      "projectPath": "F:\\coding\\Aix\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj",
+      "projectPath": "F:\\github\\my\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\Aix.FoundatioEx.Kafka.csproj",
       "packagesPath": "C:\\Users\\linzhiqiang\\.nuget\\packages\\",
-      "outputPath": "F:\\coding\\Aix\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\obj\\",
+      "outputPath": "F:\\github\\my\\Aix.FoundatioEx\\Aix.FoundatioEx.Kafka\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
