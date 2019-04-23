@@ -1,9 +1,0 @@
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\bin\Release\netstandard2.0\Foundatio.KafkaEx.deps.json
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\bin\Release\netstandard2.0\Foundatio.KafkaEx.dll
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\bin\Release\netstandard2.0\Foundatio.KafkaEx.pdb
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\obj\Release\netstandard2.0\Foundatio.KafkaEx.csproj.CoreCompileInputs.cache
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\obj\Release\netstandard2.0\Foundatio.KafkaEx.AssemblyInfoInputs.cache
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\obj\Release\netstandard2.0\Foundatio.KafkaEx.AssemblyInfo.cs
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\obj\Release\netstandard2.0\Foundatio.KafkaEx.dll
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\obj\Release\netstandard2.0\Foundatio.KafkaEx.pdb
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaEx\obj\Release\netstandard2.0\Foundatio.KafkaEx.csprojAssemblyReference.cache

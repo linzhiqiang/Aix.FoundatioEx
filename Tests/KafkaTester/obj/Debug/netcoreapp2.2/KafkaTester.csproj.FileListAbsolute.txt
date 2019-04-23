@@ -40,3 +40,17 @@ F:\coding\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTes
 F:\coding\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.csproj.CopyComplete
 F:\coding\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.dll
 F:\coding\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.pdb
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\KafkaTester.deps.json
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\KafkaTester.runtimeconfig.json
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\KafkaTester.runtimeconfig.dev.json
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\KafkaTester.dll
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\KafkaTester.pdb
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\Aix.FoundatioEx.Kafka.dll
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\bin\Debug\netcoreapp2.2\Aix.FoundatioEx.Kafka.pdb
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.csprojAssemblyReference.cache
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.csproj.CoreCompileInputs.cache
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.AssemblyInfoInputs.cache
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.AssemblyInfo.cs
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.csproj.CopyComplete
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.dll
+F:\github\Aix\Aix.FoundatioEx\Tests\KafkaTester\obj\Debug\netcoreapp2.2\KafkaTester.pdb

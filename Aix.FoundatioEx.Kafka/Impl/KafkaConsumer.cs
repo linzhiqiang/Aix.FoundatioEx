@@ -50,6 +50,7 @@ namespace Aix.FoundatioEx.Kafka
 
         public void Close()
         {
+            this._isStart = false;
             With.NoException(_logger, () => { this._consumer?.Close(); }, "关闭消费者");
         }
 

@@ -328,3 +328,9 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/Aix.MessageBus/bin
+/Aix.MessageBus.Kafka/bin
+/Samples/Sample/bin
+/Samples/Sample/obj
+/Aix.MessageBus/obj
+/Aix.MessageBus.Kafka/obj

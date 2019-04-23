@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v2.2": {
       "KafkaTester/1.0.0": {
         "dependencies": {
-          "Aix.FoundatioEx.Kafka": "0.0.4",
+          "Aix.FoundatioEx.Kafka": "1.0.0",
           "CommandLineParser": "2.4.3",
           "Microsoft.Extensions.Hosting": "2.2.0",
           "Microsoft.Extensions.Logging.Console": "2.2.0"
@@ -453,7 +453,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "Aix.FoundatioEx.Kafka/0.0.4": {
+      "Aix.FoundatioEx.Kafka/1.0.0": {
         "dependencies": {
           "Confluent.Kafka": "1.0.0-RC6",
           "Foundatio": "8.0.1965"
@@ -750,7 +750,7 @@
       "path": "system.valuetuple/4.3.0",
       "hashPath": "system.valuetuple.4.3.0.nupkg.sha512"
     },
-    "Aix.FoundatioEx.Kafka/0.0.4": {
+    "Aix.FoundatioEx.Kafka/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

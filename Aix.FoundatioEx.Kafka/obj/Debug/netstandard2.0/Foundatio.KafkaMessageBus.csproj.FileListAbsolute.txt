@@ -1,8 +1,0 @@
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\bin\Debug\netstandard2.0\Foundatio.KafkaMessageBus.deps.json
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\bin\Debug\netstandard2.0\Foundatio.KafkaMessageBus.dll
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\obj\Debug\netstandard2.0\Foundatio.KafkaMessageBus.csproj.CoreCompileInputs.cache
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\obj\Debug\netstandard2.0\Foundatio.KafkaMessageBus.AssemblyInfoInputs.cache
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\obj\Debug\netstandard2.0\Foundatio.KafkaMessageBus.AssemblyInfo.cs
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\bin\Debug\netstandard2.0\Foundatio.KafkaMessageBus.pdb
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\obj\Debug\netstandard2.0\Foundatio.KafkaMessageBus.dll
-F:\github\dotbpe\Foundatio.Extensions\src\Foundatio.KafkaMessageBus\obj\Debug\netstandard2.0\Foundatio.KafkaMessageBus.pdb
