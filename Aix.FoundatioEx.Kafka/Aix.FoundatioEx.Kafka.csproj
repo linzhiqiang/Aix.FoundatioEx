@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Aix.FoundatioEx.Kafka</RootNamespace>
+    <AssemblyName>Aix.FoundatioEx.Kafka</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Aix.FoundatioEx.Kafka</PackageId>
+    <Authors>linzhiqiang</Authors>
+    <Version>1.0.0</Version>
+    <Description>Foundatio的MessageBus的kafka实现
+支持手工提交offset模式
+支持单topic和多topic模式(所有类型消息存储在单个topic或者多个topic)</Description>
+    <PackageProjectUrl>https://coding.net/u/linzhiqiang/p/Aix/git</PackageProjectUrl>
+    <RepositoryUrl>https://coding.net/u/linzhiqiang/p/Aix/git</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="1.0.0-RC6" />
+    <PackageReference Include="Foundatio" Version="8.0.1965" />
+  </ItemGroup>
+
+</Project>

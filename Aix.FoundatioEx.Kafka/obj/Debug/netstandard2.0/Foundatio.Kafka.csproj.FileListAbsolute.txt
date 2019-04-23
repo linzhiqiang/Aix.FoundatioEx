@@ -1,0 +1,17 @@
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\bin\Debug\netstandard2.0\Foundatio.Kafka.deps.json
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\bin\Debug\netstandard2.0\Foundatio.Kafka.dll
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\bin\Debug\netstandard2.0\Foundatio.Kafka.pdb
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\obj\Debug\netstandard2.0\Foundatio.Kafka.csproj.CoreCompileInputs.cache
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\obj\Debug\netstandard2.0\Foundatio.Kafka.AssemblyInfoInputs.cache
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\obj\Debug\netstandard2.0\Foundatio.Kafka.AssemblyInfo.cs
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\obj\Debug\netstandard2.0\Foundatio.Kafka.dll
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\obj\Debug\netstandard2.0\Foundatio.Kafka.pdb
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.KafkaEx\obj\Debug\netstandard2.0\Foundatio.Kafka.csprojAssemblyReference.cache
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\bin\Debug\netstandard2.0\Foundatio.Kafka.deps.json
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\bin\Debug\netstandard2.0\Foundatio.Kafka.dll
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\bin\Debug\netstandard2.0\Foundatio.Kafka.pdb
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\obj\Debug\netstandard2.0\Foundatio.Kafka.csproj.CoreCompileInputs.cache
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\obj\Debug\netstandard2.0\Foundatio.Kafka.AssemblyInfoInputs.cache
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\obj\Debug\netstandard2.0\Foundatio.Kafka.AssemblyInfo.cs
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\obj\Debug\netstandard2.0\Foundatio.Kafka.dll
+F:\coding\Aix\Aix.Foundatio.Kafka\Foundatio.Kafka\obj\Debug\netstandard2.0\Foundatio.Kafka.pdb
