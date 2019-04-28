@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+
+      "name": "aix-foundatio-messagebus-producer",
+      "script": "./service",
+      "exec_interpreter": "bash",
+      "cwd": "./foundatiomessagebus",
+      "error_file": "/home/dotnet/logs/foundatio-messagebus-producer/console-error.log",
+      "out_file": "/home/dotnet/logs/foundatio-messagebus-producer/console.log",
+      "max_memory_restart": "500M"
+    },
+    {
+
+      "name": "aix-foundatio-messagebus-consumer",
+      "script": "./serviceconsumer",
+      "exec_interpreter": "bash",
+      "cwd": "./foundatiomessagebus",
+      "error_file": "/home/dotnet/logs/foundatio-messagebus-consumer/console-error.log",
+      "out_file": "/home/dotnet/logs/foundatio-messagebus-consumer/console.log",
+      "max_memory_restart": "500M"
+    }
+  ]
+}

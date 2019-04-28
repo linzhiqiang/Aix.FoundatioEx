@@ -39,7 +39,6 @@ namespace KafkaTester
         }
         static void Run(CmdOptions options)
         {
-            Console.WriteLine(options.Count);
             var host = new HostBuilder()
                 .ConfigureAppConfiguration((hostContext, config) =>
                  {
@@ -86,7 +85,7 @@ namespace KafkaTester
                     GroupId = "demo-messagebus",
                     BootstrapServers = bootstrapServers,
                     AutoOffsetReset = AutoOffsetReset.Earliest,
-                    EnableAutoCommit = false,
+                    EnableAutoCommit = false, //手动提交，避免数据丢失。但是数据重复问题避免不了，需要业务上做处理
                     AutoCommitIntervalMs = 5000, //自动提交偏移量间隔 ，每5秒同步一次,当再均衡时，如果有消费者一直没有poll，会等到所有的消费者都poll之后才再均衡处理
                     CancellationDelayMaxMs = 1000 //poll等待时间，如果自己 consumer.Consume(TimeSpan.FromSeconds(1));写的时间就不用这个配置了
 

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,15 +40,20 @@ namespace KafkaTester
         private async Task Test(CancellationToken cancellationToken)
         {
             int producerCount = _cmdOptions.Count > 0 ? _cmdOptions.Count : 1;
+            var duration = Stopwatch.StartNew();
             for (int i = 0; i < producerCount; i++)
             {
                 if (cancellationToken.IsCancellationRequested) break;
 
                 var messageData = new KafkaMessage { MessageId = i.ToString(), Content = $"我是内容_{i}", CreateTime = DateTime.Now };
-
-                Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
+                //_logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
                 await _messageBus.PublishAsync(messageData);
             }
+            duration.Stop();
+
+           var totalSecond= duration.ElapsedMilliseconds /1000;//执行任务的时间
+
+            _logger.LogInformation($"生产效率={producerCount*1.0/ totalSecond}");
         }
     }
 }

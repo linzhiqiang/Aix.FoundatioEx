@@ -19,4 +19,13 @@
     <ProjectReference Include="..\..\Aix.FoundatioEx.Kafka\Aix.FoundatioEx.Kafka.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="service">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="serviceconsumer">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
