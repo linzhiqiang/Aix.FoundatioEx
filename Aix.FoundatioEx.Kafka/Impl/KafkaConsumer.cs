@@ -12,6 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Aix.FoundatioEx.Kafka
 {
+    /// <summary>
+    /// kafka消费者
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     internal class KafkaConsumer<TKey, TValue> : IKafkaConsumer<TKey, TValue>
     {
         private IServiceProvider _serviceProvider;
@@ -25,6 +30,7 @@ namespace Aix.FoundatioEx.Kafka
         /// </summary>
         private ConcurrentDictionary<TopicPartition, TopicPartitionOffset> _offsetDict = new ConcurrentDictionary<TopicPartition, TopicPartitionOffset>();
         private volatile bool _isStart = false;
+        private int Count = 0;
 
         public event Func<ConsumeResult<TKey, TValue>, Task> OnMessage;
         public KafkaConsumer(IServiceProvider serviceProvider)
@@ -51,6 +57,14 @@ namespace Aix.FoundatioEx.Kafka
         public void Close()
         {
             this._isStart = false;
+            With.NoException(_logger, () =>
+            {
+                if (EnableAutoCommit() == false)
+                {
+                    this._consumer.Commit();
+                }
+            }, "关闭消费者时提交偏移量");
+
             With.NoException(_logger, () => { this._consumer?.Close(); }, "关闭消费者");
         }
 
@@ -75,6 +89,7 @@ namespace Aix.FoundatioEx.Kafka
                         {
                             continue;
                         }
+                        Count++;
                         //消费数据
                         await Handler(result);
 
@@ -83,10 +98,14 @@ namespace Aix.FoundatioEx.Kafka
                         {
                             var topicPartition = result.TopicPartition;
                             var topicPartitionOffset = new TopicPartitionOffset(topicPartition, result.Offset + 1);
-                            AddToOffsetDict(topicPartition, topicPartitionOffset); //加入offset缓存
+                            AddToOffsetDict(topicPartition, topicPartitionOffset); //加入offset缓存 加入缓存在handler之后处理，就是至少一次，在handler之前加入缓存，就是至多一次
 
-                            _offsetDict.TryGetValue(topicPartition, out TopicPartitionOffset maxOffset); //取出最大的offset提交，可能并发当前的不是最大的
-                            this._consumer.Commit(new[] { maxOffset }); //if (maxOffset.Offset == topicPartitionOffset.Offset) 
+                            if (Count % _kafkaOptions.ManualCommitBatch == 0)
+                            {
+                                _offsetDict.TryGetValue(topicPartition, out TopicPartitionOffset maxOffset); //取出最大的offset提交，可能并发当前的不是最大的
+                                this._consumer.Commit(new[] { maxOffset });
+                            }
+
                         }
                     }
                 }
@@ -129,7 +148,8 @@ namespace Aix.FoundatioEx.Kafka
             var consumer = new ConsumerBuilder<TKey, TValue>(_kafkaOptions.ConsumerConfig)
                   .SetErrorHandler((producer, error) =>
                   {
-                      _logger.LogError($"Kafka生产者出错：{error.Reason}");
+                      string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
+                      _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka消费者出错：{errorInfo}");
                   })
                   .SetPartitionsRevokedHandler((c, partitions) =>
                   {
@@ -151,13 +171,16 @@ namespace Aix.FoundatioEx.Kafka
                       }
                       _logger.LogInformation($"MemberId:{c.MemberId}分配的分区：Assigned partitions: [{string.Join(", ", partitions)}]");
                   })
-                //.SetKeyDeserializer(new ConfluentKafkaSerializerAdapter<TKey>(_kafkaOptions.Serializer))
                 .SetValueDeserializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
                 .Build();
 
             return consumer;
         }
 
+        /// <summary>
+        /// 是否是自动提交
+        /// </summary>
+        /// <returns></returns>
         private bool EnableAutoCommit()
         {
             var enableAutoCommit = this._kafkaOptions.ConsumerConfig.EnableAutoCommit;

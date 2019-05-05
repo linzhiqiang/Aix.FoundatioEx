@@ -36,6 +36,7 @@ namespace Aix.FoundatioEx.Kafka
             this.Serializer = new DefaultKafkaSerializer();
             this.ConsumerThreadCount = 4;
             this.TopicMode = TopicMode.multiple;
+            this.ManualCommitBatch = 10;
         }
 
         public ProducerConfig ProducerConfig { get; set; }
@@ -66,5 +67,10 @@ namespace Aix.FoundatioEx.Kafka
         /// 不同类型消息是单个topic 还是多topic,默认值是多topic
         /// </summary>
         public TopicMode TopicMode { get; set; }
+
+        /// <summary>
+        /// EnableAutoCommit=false时每多少个消息提交一次 默认10条消息提交一次
+        /// </summary>
+        public int ManualCommitBatch { get; set; }
     }
 }

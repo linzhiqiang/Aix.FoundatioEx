@@ -74,6 +74,7 @@ namespace KafkaTester
                 TopicPrefix = "KafkaDemo", //项目名称
                 //TopicMode = TopicMode.Single,
                 ConsumerThreadCount = 4,
+                ManualCommitBatch = 10,
                 ProducerConfig = new ProducerConfig
                 {
                     BootstrapServers = bootstrapServers,

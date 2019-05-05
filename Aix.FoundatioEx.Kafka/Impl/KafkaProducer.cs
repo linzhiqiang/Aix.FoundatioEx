@@ -9,6 +9,11 @@ using Aix.FoundatioEx.Kafka.Utils;
 
 namespace Aix.FoundatioEx.Kafka
 {
+    /// <summary>
+    /// kafka生产者实现
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     internal class KafkaProducer<TKey, TValue> : IKafkaProducer<TKey, TValue>
     {
         private IServiceProvider _serviceProvider;
@@ -33,6 +38,7 @@ namespace Aix.FoundatioEx.Kafka
 
         public void Dispose()
         {
+            _logger.LogInformation("Kafka关闭生产者");
             if (this._producer != null)
             {
                 With.NoException(_logger, () => { this._producer.Dispose(); }, "关闭生产者");
@@ -54,9 +60,9 @@ namespace Aix.FoundatioEx.Kafka
                 IProducer<TKey, TValue> producer = new ProducerBuilder<TKey, TValue>(_kafkaOptions.ProducerConfig)
                 .SetErrorHandler((p, error) =>
                 {
-                    _logger.LogError($"Kafka生产者出错：{error.Reason}");
+                    string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
+                    _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka生产者出错：{errorInfo}");
                 })
-               //.SetKeySerializer(new ConfluentKafkaSerializerAdapter<TKey>(_kafkaOptions.Serializer))
                .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
                .Build();
 
