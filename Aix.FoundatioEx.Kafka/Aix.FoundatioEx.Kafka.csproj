@@ -7,13 +7,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Aix.FoundatioEx.Kafka</PackageId>
     <Authors>linzhiqiang</Authors>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Description>Foundatio的MessageBus的kafka实现
 支持手工提交offset模式
 支持单topic和多topic模式(所有类型消息存储在单个topic或者多个topic)</Description>
     <PackageProjectUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</PackageProjectUrl>
     <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
-    <PackageReleaseNotes>消费者增加ManualCommitBatch参数，手工提交时 消费多少条消息提交一次，提高消费效率</PackageReleaseNotes>
+    <PackageReleaseNotes>单topic模式时控制消费者线程数</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
