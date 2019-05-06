@@ -50,15 +50,16 @@ namespace KafkaTester
             {
                 if (cancellationToken.IsCancellationRequested) break;
 
-                var messageData = new KafkaMessage { MessageId = i.ToString(), Content = $"我是内容_{i}", CreateTime = DateTime.Now };
-                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
+                var messageData = new KafkaMessage { MessageId = i.ToString(), Content = $"KafkaMessage我是内容_{i}", CreateTime = DateTime.Now };
                 await _messageBus.PublishAsync(messageData);
+                if ((i + 1) % 10000 == 0)
+                    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage：MessageId={messageData.MessageId}");
             }
             duration.Stop();
 
-           var totalSecond= duration.ElapsedMilliseconds /1000;//执行任务的时间
+            var totalSecond = duration.ElapsedMilliseconds / 1000;//执行任务的时间
 
-            _logger.LogInformation($"生产效率={producerCount*1.0/ totalSecond}");
+            _logger.LogInformation($"生产效率={producerCount * 1.0 / totalSecond}");
         }
 
         private async Task Test2(CancellationToken cancellationToken)
@@ -69,9 +70,10 @@ namespace KafkaTester
             {
                 if (cancellationToken.IsCancellationRequested) break;
 
-                var messageData = new KafkaMessage2 { MessageId = i.ToString(), Content = $"我是内容_{i}", CreateTime = DateTime.Now };
-                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
+                var messageData = new KafkaMessage2 { MessageId = i.ToString(), Content = $"KafkaMessage2我是内容_{i}", CreateTime = DateTime.Now };
                 await _messageBus.PublishAsync(messageData);
+                if ((i + 1) % 10000 == 0)
+                    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage2：MessageId={messageData.MessageId}");
             }
             duration.Stop();
 
