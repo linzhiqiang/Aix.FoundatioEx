@@ -7,7 +7,6 @@ namespace Aix.FoundatioEx.Kafka
     {
         public static IServiceCollection AddKafkaMessageBus(this IServiceCollection services, KafkaMessageBusOptions options)
         {
-
             services
                .AddSingleton<KafkaMessageBusOptions>(options)
                .AddSingleton<IMessageBus, KafkaMessageBus>();

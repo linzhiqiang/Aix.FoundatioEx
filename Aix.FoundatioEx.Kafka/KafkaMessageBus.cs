@@ -34,11 +34,11 @@ namespace Aix.FoundatioEx.Kafka
             _logger = logger;
             _kafkaOptions = kafkaOptions;
 
-            if ((kafkaOptions.KafkaMessageBusMode & KafkaMessageBusMode.Producer) == KafkaMessageBusMode.Producer)
+            if ((kafkaOptions.ClientMode & ClientMode.Producer) == ClientMode.Producer)
             {
                 this._producer = new KafkaProducer<Null, MessageBusData>(serviceProvider);
             }
-            if ((kafkaOptions.KafkaMessageBusMode & KafkaMessageBusMode.Consumer) == KafkaMessageBusMode.Consumer)
+            if ((kafkaOptions.ClientMode & ClientMode.Consumer) == ClientMode.Consumer)
             {
                 //消费者连接订阅时再创建
             }
@@ -94,10 +94,9 @@ namespace Aix.FoundatioEx.Kafka
             _logger.LogInformation("KafkaMessageBus 释放...");
             if (_producer != null)
             {
-                _logger.LogInformation("KafkaMessageBus 关闭生产者");
                 With.NoException(_logger, () => { _producer.Dispose(); }, "关闭生产者");
             }
-            _logger.LogInformation("KafkaMessageBus 关闭消费者");
+           
             foreach (var item in _consumerList)
             {
                 item.Close();
@@ -150,7 +149,8 @@ namespace Aix.FoundatioEx.Kafka
         {
             if (this._kafkaOptions.TopicMode == TopicMode.Single)
             {
-                return GetTopic("MessageBus");
+                //return GetTopic("MessageBus");
+                return this._kafkaOptions.Topic;
             }
             return GetTopic(type.Name);
         }
