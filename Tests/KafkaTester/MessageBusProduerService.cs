@@ -29,6 +29,11 @@ namespace KafkaTester
                 return Test(cancellationToken);
             });
 
+            Task.Run(() =>
+            {
+                return Test2(cancellationToken);
+            });
+
             return Task.CompletedTask;
         }
 
@@ -54,6 +59,25 @@ namespace KafkaTester
            var totalSecond= duration.ElapsedMilliseconds /1000;//执行任务的时间
 
             _logger.LogInformation($"生产效率={producerCount*1.0/ totalSecond}");
+        }
+
+        private async Task Test2(CancellationToken cancellationToken)
+        {
+            int producerCount = _cmdOptions.Count > 0 ? _cmdOptions.Count : 1;
+            var duration = Stopwatch.StartNew();
+            for (int i = 0; i < producerCount; i++)
+            {
+                if (cancellationToken.IsCancellationRequested) break;
+
+                var messageData = new KafkaMessage2 { MessageId = i.ToString(), Content = $"我是内容_{i}", CreateTime = DateTime.Now };
+                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
+                await _messageBus.PublishAsync(messageData);
+            }
+            duration.Stop();
+
+            var totalSecond = duration.ElapsedMilliseconds / 1000;//执行任务的时间
+
+            _logger.LogInformation($"生产效率={producerCount * 1.0 / totalSecond}");
         }
     }
 }

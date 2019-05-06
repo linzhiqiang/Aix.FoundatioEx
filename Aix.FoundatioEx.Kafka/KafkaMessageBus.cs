@@ -27,7 +27,7 @@ namespace Aix.FoundatioEx.Kafka
         List<IKafkaConsumer<Null, MessageBusData>> _consumerList = new List<IKafkaConsumer<Null, MessageBusData>>();
 
         ConcurrentDictionary<string, List<SubscriberInfo>> _subscriberDict = new ConcurrentDictionary<string, List<SubscriberInfo>>();
-
+        HashSet<string> _subscriberTopicSet = new HashSet<string>();
         public KafkaMessageBus(IServiceProvider serviceProvider, ILogger<KafkaMessageBus> logger, KafkaMessageBusOptions kafkaOptions)
         {
             _serviceProvider = serviceProvider;
@@ -68,12 +68,10 @@ namespace Aix.FoundatioEx.Kafka
                 }
             };
 
-            bool hasSubscribeType = false; //该类型是否已订阅过kafka
             lock (typeof(T))
             {
                 if (_subscriberDict.ContainsKey(handlerKey))
                 {
-                    hasSubscribeType = true;
                     _subscriberDict[handlerKey].Add(subscriber);
                 }
                 else
@@ -82,10 +80,8 @@ namespace Aix.FoundatioEx.Kafka
 
                 }
             }
-            if (!hasSubscribeType) //没有订阅过kafka  kafka主题订阅一次就够了
-            {
-                await SubscribeKafka(typeof(T), cancellationToken);
-            }
+
+            await SubscribeKafka(typeof(T), cancellationToken);
         }
 
 
@@ -96,7 +92,7 @@ namespace Aix.FoundatioEx.Kafka
             {
                 With.NoException(_logger, () => { _producer.Dispose(); }, "关闭生产者");
             }
-           
+
             foreach (var item in _consumerList)
             {
                 item.Close();
@@ -107,6 +103,15 @@ namespace Aix.FoundatioEx.Kafka
 
         private Task SubscribeKafka(Type type, CancellationToken cancellationToken)
         {
+            var topic = GetTopic(type);
+            if (_subscriberTopicSet.Contains(topic)) return Task.CompletedTask; //同一主题订阅一次即可
+            lock (_subscriberTopicSet)
+            {
+                if (_subscriberTopicSet.Contains(topic)) return Task.CompletedTask;
+
+                _subscriberTopicSet.Add(topic);
+            }
+
             Task.Run(async () =>
             {
                 for (int i = 0; i < _kafkaOptions.ConsumerThreadCount; i++)
@@ -114,7 +119,7 @@ namespace Aix.FoundatioEx.Kafka
                     var consumer = new KafkaConsumer<Null, MessageBusData>(_serviceProvider);
                     consumer.OnMessage += Handler;
                     _consumerList.Add(consumer);
-                    await consumer.Subscribe(GetTopic(type), cancellationToken);
+                    await consumer.Subscribe(topic, cancellationToken);
                 }
             });
 
@@ -149,14 +154,13 @@ namespace Aix.FoundatioEx.Kafka
         {
             if (this._kafkaOptions.TopicMode == TopicMode.Single)
             {
-                //return GetTopic("MessageBus");
-                return this._kafkaOptions.Topic;
+                return GetTopic(this._kafkaOptions.Topic);
             }
             return GetTopic(type.Name);
         }
         private string GetTopic(string name)
         {
-            return $"{_kafkaOptions.TopicPrefix}-{name}";
+            return $"{_kafkaOptions.TopicPrefix ?? string.Empty}{name}";
         }
 
         #endregion
