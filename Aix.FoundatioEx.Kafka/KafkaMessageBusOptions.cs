@@ -31,7 +31,8 @@ namespace Aix.FoundatioEx.Kafka
     {
         public KafkaMessageBusOptions()
         {
-            this.TopicPrefix = "kafka";
+            //this.TopicPrefix = "kafka-";
+            this.Topic = "messagebus";
             this.ClientMode = ClientMode.Producer;
             this.Serializer = new DefaultKafkaSerializer();
             this.ConsumerThreadCount = 4;
@@ -51,7 +52,7 @@ namespace Aix.FoundatioEx.Kafka
         public string TopicPrefix { get; set; }
 
         /// <summary>
-        /// 针对单topic模式可以指定topic，覆盖系统的TopicPrefix参数也无效
+        /// 针对单topic模式可以指定topic
         /// </summary>
         public string Topic { get; set; }
 
