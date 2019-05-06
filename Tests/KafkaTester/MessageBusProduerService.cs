@@ -46,7 +46,7 @@ namespace KafkaTester
                 if (cancellationToken.IsCancellationRequested) break;
 
                 var messageData = new KafkaMessage { MessageId = i.ToString(), Content = $"我是内容_{i}", CreateTime = DateTime.Now };
-                //_logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
+                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据：MessageId={messageData.MessageId}");
                 await _messageBus.PublishAsync(messageData);
             }
             duration.Stop();

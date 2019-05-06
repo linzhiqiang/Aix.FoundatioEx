@@ -55,23 +55,29 @@ namespace Aix.FoundatioEx.Kafka
             {
                 if (this._producer != null) return;
 
-                if (_kafkaOptions.ProducerConfig == null) throw new Exception("请配置ProducerConfig参数");
-                if (string.IsNullOrEmpty(_kafkaOptions.ProducerConfig.BootstrapServers)) throw new Exception("请配置ProducerConfig.BootstrapServers参数");
-                IProducer<TKey, TValue> producer = new ProducerBuilder<TKey, TValue>(_kafkaOptions.ProducerConfig)
-                .SetErrorHandler((p, error) =>
+                if (_kafkaOptions.ProducerConfig == null) _kafkaOptions.ProducerConfig = new ProducerConfig();
+                if (string.IsNullOrEmpty(_kafkaOptions.ProducerConfig.BootstrapServers))
                 {
-                    string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
-                    _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka生产者出错：{errorInfo}");
-                })
-               .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
-               .Build();
+                    _kafkaOptions.ProducerConfig.BootstrapServers = _kafkaOptions.BootstrapServers;
+                }
+                if (string.IsNullOrEmpty(_kafkaOptions.ProducerConfig.BootstrapServers))
+                {
+                    throw new Exception("BootstrapServers参数");
+                }
+                IProducer<TKey, TValue> producer = new ProducerBuilder<TKey, TValue>(_kafkaOptions.ProducerConfig)
+            .SetErrorHandler((p, error) =>
+            {
+                string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
+                _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka生产者出错：{errorInfo}");
+            })
+           .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
+           .Build();
 
                 this._producer = producer;
             }
         }
 
         #endregion
-
 
     }
 }

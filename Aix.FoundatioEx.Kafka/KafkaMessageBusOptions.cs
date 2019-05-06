@@ -7,7 +7,7 @@ using System.Text;
 namespace Aix.FoundatioEx.Kafka
 {
     [Flags]
-    public enum KafkaMessageBusMode
+    public enum ClientMode
     {
         Producer = 1,
         Consumer = 2,
@@ -32,10 +32,10 @@ namespace Aix.FoundatioEx.Kafka
         public KafkaMessageBusOptions()
         {
             this.TopicPrefix = "kafka";
-            this.KafkaMessageBusMode = KafkaMessageBusMode.Producer;
+            this.ClientMode = ClientMode.Producer;
             this.Serializer = new DefaultKafkaSerializer();
             this.ConsumerThreadCount = 4;
-            this.TopicMode = TopicMode.multiple;
+            this.TopicMode = TopicMode.Single;
             this.ManualCommitBatch = 10;
         }
 
@@ -43,15 +43,22 @@ namespace Aix.FoundatioEx.Kafka
 
         public ConsumerConfig ConsumerConfig { get; set; }
 
+        public string BootstrapServers { get; set; }
+
         /// <summary>
-        /// topic前缀，为了防止重复，建议用项目名称
+        /// 多topic时的前缀，为了防止重复，建议用项目名称
         /// </summary>
         public string TopicPrefix { get; set; }
 
         /// <summary>
+        /// 针对单topic模式可以指定topic，覆盖系统的TopicPrefix参数也无效
+        /// </summary>
+        public string Topic { get; set; }
+
+        /// <summary>
         /// 客户端模式，是生产者还是消费者
         /// </summary>
-        public KafkaMessageBusMode KafkaMessageBusMode { get; set; }
+        public ClientMode ClientMode { get; set; }
 
         /// <summary>
         /// 自定义序列化，默认为MessagePack
@@ -64,7 +71,7 @@ namespace Aix.FoundatioEx.Kafka
         public int ConsumerThreadCount { get; set; }
 
         /// <summary>
-        /// 不同类型消息是单个topic 还是多topic,默认值是多topic
+        /// 不同类型消息是单个topic 还是多topic,默认值是Single
         /// </summary>
         public TopicMode TopicMode { get; set; }
 

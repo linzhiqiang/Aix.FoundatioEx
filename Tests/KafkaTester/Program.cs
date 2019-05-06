@@ -6,13 +6,14 @@ using Foundatio.Messaging;
 using Confluent.Kafka;
 using Aix.FoundatioEx.Kafka;
 using CommandLine;
+using Microsoft.Extensions.Configuration;
 
 namespace KafkaTester
 {
     /*
-   dotnet run -m p -q 100  //生产者测试
-   dotnet run -m c  //消费者测试
-   dotnet run -m a -q 100 //生产者消费者一起测试
+   dotnet run -m 1 -q 100  //生产者测试
+   dotnet run -m 2  //消费者测试
+   dotnet run -m 3 -q 100 //生产者消费者一起测试
     */
 
     /// <summary>
@@ -20,10 +21,10 @@ namespace KafkaTester
     /// </summary>
     public class CmdOptions
     {
-        [Option('m', "mode", Required = false, HelpText = "p=生产者测试，c=消费者测试,a=同时测试")]
-        public string Mode { get; set; }
+        [Option('m', "mode", Required = false, Default =1, HelpText = "1=生产者测试，2=消费者测试,3=同时测试")]
+        public ClientMode Mode { get; set; }
 
-        [Option('q', "quantity", Required = false, HelpText = "测试生产数量")]
+        [Option('q', "quantity", Required = false, Default =1, HelpText = "测试生产数量")]
         public int Count { get; set; }
     }
     class Program
@@ -34,7 +35,6 @@ namespace KafkaTester
             {
                 setting.CaseSensitive = false;
             });
-            //Parser.Default.ParseArguments<CmdOptions>(args).WithParsed(Run);
             parser.ParseArguments<CmdOptions>(args).WithParsed(Run);
         }
         static void Run(CmdOptions options)
@@ -42,6 +42,7 @@ namespace KafkaTester
             var host = new HostBuilder()
                 .ConfigureAppConfiguration((hostContext, config) =>
                  {
+                     config.AddJsonFile("appsettings.json", optional: true);
                  })
                 .ConfigureLogging((context, factory) =>
                 {
@@ -50,12 +51,17 @@ namespace KafkaTester
                 .ConfigureServices((context, services) =>
                 {
                     services.AddSingleton<CmdOptions>(options);
-                    AddKafkaMessageBus(services);
-                    if (string.IsNullOrEmpty(options.Mode) || options.Mode == "c" || options.Mode == "a")
+
+                   var kafkaMessageBusOptions=  context.Configuration.GetSection("kafka").Get<KafkaMessageBusOptions>();
+                    kafkaMessageBusOptions.ClientMode = options.Mode;//这里方便测试，以命令行参数为准
+                    services.AddKafkaMessageBus(kafkaMessageBusOptions);
+
+                   // AddKafkaMessageBus(services);
+                    if ((options.Mode & ClientMode.Consumer) > 0)
                     {
                         services.AddHostedService<MessageBusConsumeService>();
                     }
-                    if (string.IsNullOrEmpty(options.Mode) || options.Mode == "p" || options.Mode == "a")
+                    if ((options.Mode & ClientMode.Producer) > 0)
                     {
                         services.AddHostedService<MessageBusProduerService>();
                     }
@@ -70,7 +76,7 @@ namespace KafkaTester
                                                                                                     // bootstrapServers = "192.168.72.130:9092,192.168.72.130:9093,192.168.72.130:9094";//home 虚拟机
             var options = new KafkaMessageBusOptions
             {
-                KafkaMessageBusMode = KafkaMessageBusMode.Both,
+                ClientMode = ClientMode.Both,
                 TopicPrefix = "KafkaDemo", //项目名称
                 //TopicMode = TopicMode.Single,
                 ConsumerThreadCount = 4,
@@ -92,6 +98,8 @@ namespace KafkaTester
 
                 }
             };
+
+
 
             services.AddKafkaMessageBus(options);
         }
