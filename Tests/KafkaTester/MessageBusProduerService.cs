@@ -29,10 +29,10 @@ namespace KafkaTester
                 return Test(cancellationToken);
             });
 
-            Task.Run(() =>
-            {
-                return Test2(cancellationToken);
-            });
+            //Task.Run(() =>
+            //{
+            //    return Test2(cancellationToken);
+            //});
 
             return Task.CompletedTask;
         }
@@ -53,7 +53,7 @@ namespace KafkaTester
                 var messageData = new KafkaMessage { MessageId = i.ToString(), Content = $"KafkaMessage我是内容_{i}", CreateTime = DateTime.Now };
                 await _messageBus.PublishAsync(messageData);
                 //if ((i + 1) % 10000 == 0)
-                    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage：MessageId={messageData.MessageId}");
+                  //  _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage：MessageId={messageData.MessageId}");
             }
             duration.Stop();
 
