@@ -72,6 +72,7 @@ namespace Aix.FoundatioEx.Kafka
             {
                 if (_subscriberDict.ContainsKey(handlerKey))
                 {
+                    //throw new Exception("不支持同类型订阅多次");//为了实现重试机制
                     _subscriberDict[handlerKey].Add(subscriber);
                 }
                 else
@@ -134,20 +135,22 @@ namespace Aix.FoundatioEx.Kafka
             if (!hasHandler || list == null) return;
             foreach (var item in list)
             {
-                if (item.CancellationToken != null && item.CancellationToken.IsCancellationRequested)
-                    continue;
-
                 if (item.CancellationToken != null && item.CancellationToken.IsCancellationRequested) return;
                 await With.NoException(_logger, async () =>
                  {
-                     await item.Action(consumeResult.Value.Data, item.CancellationToken);
+                     await With.ReTry(_logger, async () =>
+                     {
+                         await item.Action(consumeResult.Value.Data, item.CancellationToken);
+                     }, $"消费数据{consumeResult.Value.Type}");
+
                  }, $"消费数据{consumeResult.Value.Type}");
             }
         }
 
         private string GetHandlerKey(Type type)
         {
-            return type.FullName;
+            //return type.FullName;
+            return String.Concat(type.FullName, ", ", type.Assembly.GetName().Name);
         }
 
         private string GetTopic(Type type)
