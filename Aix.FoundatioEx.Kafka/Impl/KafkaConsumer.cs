@@ -129,7 +129,10 @@ namespace Aix.FoundatioEx.Kafka
                 if (Count % _kafkaOptions.ManualCommitBatch == 0)
                 {
                     _offsetDict.TryGetValue(topicPartition, out TopicPartitionOffset maxOffset); //取出最大的offset提交，可能并发当前的不是最大的
-                    this._consumer.Commit(new[] { maxOffset });
+                    With.NoException(_logger, () =>
+                    {
+                        this._consumer.Commit(new[] { maxOffset });
+                    }, "手动提交偏移量");
                 }
             }
         }
@@ -188,9 +191,13 @@ namespace Aix.FoundatioEx.Kafka
                       if (EnableAutoCommit() == false)
                       {
                           //只提交当前消费者分配的分区
-                          c.Commit(_offsetDict.Values.Where(x => partitions.Exists(current => current.Topic == x.Topic && current.Partition == x.Partition)));
-                          _logger.LogInformation("Kafka再均衡提交");
-                          _offsetDict.Clear();
+                          With.NoException(_logger, () =>
+                          {
+                              c.Commit(_offsetDict.Values.Where(x => partitions.Exists(current => current.Topic == x.Topic && current.Partition == x.Partition)));
+                              _logger.LogInformation("Kafka再均衡提交");
+                              _offsetDict.Clear();
+                          }, "Kafka再均衡提交");
+
                       }
                   })
                   .SetPartitionsAssignedHandler((c, partitions) =>

@@ -45,7 +45,7 @@ namespace KafkaTester
             await _messageBus.SubscribeAsync<KafkaMessage>(async (message) =>
             {
                 var current = Interlocked.Increment(ref Count);
-                if (current % 10000 == 0)
+                //if (current % 10000 == 0)
                     _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
                 //await Task.Delay(100);
                 await Task.CompletedTask;
@@ -55,7 +55,7 @@ namespace KafkaTester
             await _messageBus.SubscribeAsync<KafkaMessage2>(async (message) =>
             {
                 var current = Interlocked.Increment(ref Count);
-                if (current % 10000 == 0)
+                //if (current % 10000 == 0)
                     _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
                 //await Task.Delay(100);
                 await Task.CompletedTask;

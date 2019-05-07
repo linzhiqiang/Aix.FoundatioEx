@@ -72,6 +72,7 @@ namespace Aix.FoundatioEx.Kafka
             {
                 if (_subscriberDict.ContainsKey(handlerKey))
                 {
+                    //throw new Exception("不支持同类型订阅多次");//为了实现重试机制
                     _subscriberDict[handlerKey].Add(subscriber);
                 }
                 else
