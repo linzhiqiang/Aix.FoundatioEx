@@ -7,13 +7,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Aix.FoundatioEx.Kafka</PackageId>
     <Authors>linzhiqiang</Authors>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Description>Foundatio的MessageBus的kafka实现
 支持手工提交offset模式
 支持单topic和多topic模式(所有类型消息存储在单个topic或者多个topic)</Description>
     <PackageProjectUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</PackageProjectUrl>
     <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
-    <PackageReleaseNotes>非错误异常不记录日志</PackageReleaseNotes>
+    <PackageReleaseNotes>异常本地重试3次</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
