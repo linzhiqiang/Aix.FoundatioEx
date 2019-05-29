@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Aix.FoundatioEx.Kafka\Aix.FoundatioEx.Kafka.csproj" />
+    <ProjectReference Include="..\..\src\Aix.FoundatioEx.Kafka\Aix.FoundatioEx.Kafka.csproj" />
   </ItemGroup>
 
   <ItemGroup>

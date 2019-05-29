@@ -53,7 +53,7 @@ namespace KafkaTester
                 var messageData = new KafkaMessage { MessageId = i.ToString(), Content = $"KafkaMessage我是内容_{i}", CreateTime = DateTime.Now };
                 await _messageBus.PublishAsync(messageData);
                 //if ((i + 1) % 10000 == 0)
-                  //  _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage：MessageId={messageData.MessageId}");
+                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage：MessageId={messageData.MessageId}");
             }
             duration.Stop();
 
@@ -72,8 +72,8 @@ namespace KafkaTester
 
                 var messageData = new KafkaMessage2 { MessageId = i.ToString(), Content = $"KafkaMessage2我是内容_{i}", CreateTime = DateTime.Now };
                 await _messageBus.PublishAsync(messageData);
-               // if ((i + 1) % 10000 == 0)
-                    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage2：MessageId={messageData.MessageId}");
+                // if ((i + 1) % 10000 == 0)
+                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}生产数据KafkaMessage2：MessageId={messageData.MessageId}");
             }
             duration.Stop();
 

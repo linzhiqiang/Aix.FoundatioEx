@@ -78,24 +78,30 @@ namespace Aix.FoundatioEx.Kafka
 
         private Task StartPoll(CancellationToken cancellationToken)
         {
-            Task.Run(async () =>
+            Task.Factory.StartNew(async () =>
             {
+                _logger.LogInformation("开始消费数据...");
                 try
                 {
-                    _logger.LogInformation("开始消费数据...");
+
                     while (_isStart && !cancellationToken.IsCancellationRequested)
                     {
-                        var result = this._consumer.Consume(TimeSpan.FromSeconds(1));
-                        if (result == null || result.IsPartitionEOF || result.Value == null)
+                        try
                         {
-                            continue;
+                            await Consume();
                         }
-                        Count++;
-                        //消费数据
-                        await Handler(result);
-
-                        //处理手动提交
-                        ManualCommitOffset(result); //采用后提交（至少一次）,消费前提交（至多一次）
+                        catch (ConsumeException ex)
+                        {
+                            _logger.LogError($"消费拉取消息ConsumeException, {ex.Message}, {ex.StackTrace}");
+                        }
+                        catch (KafkaException ex)
+                        {
+                            _logger.LogError($"消费拉取消息KafkaException, {ex.Message}, {ex.StackTrace}");
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError($"消费拉取消息系统异常, {ex.Message}, {ex.StackTrace}");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -109,9 +115,24 @@ namespace Aix.FoundatioEx.Kafka
                 }
             });
 
-
             return Task.CompletedTask;
         }
+
+        private async Task Consume()
+        {
+            var result = this._consumer.Consume(TimeSpan.FromSeconds(1));
+            if (result == null || result.IsPartitionEOF || result.Value == null)
+            {
+                return;
+            }
+            Count++;
+            //消费数据
+            await Handler(result);
+
+            //处理手动提交
+            ManualCommitOffset(result); //采用后提交（至少一次）,消费前提交（至多一次）
+        }
+       
 
         /// <summary>
         /// 手工提交offset
@@ -145,7 +166,10 @@ namespace Aix.FoundatioEx.Kafka
                 {
                     await OnMessage(consumeResult);
                 }, "kafka消费失败");
-
+            }
+            else
+            {
+                _logger.LogWarning("kafka没有注册消费事件");
             }
         }
         private void AddToOffsetDict(TopicPartition topicPartition, TopicPartitionOffset TopicPartitionOffset)
