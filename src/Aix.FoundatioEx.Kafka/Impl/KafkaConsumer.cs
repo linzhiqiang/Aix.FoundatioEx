@@ -132,7 +132,7 @@ namespace Aix.FoundatioEx.Kafka
             //处理手动提交
             ManualCommitOffset(result); //采用后提交（至少一次）,消费前提交（至多一次）
         }
-       
+
 
         /// <summary>
         /// 手工提交offset
@@ -205,8 +205,11 @@ namespace Aix.FoundatioEx.Kafka
             var consumer = new ConsumerBuilder<TKey, TValue>(_kafkaOptions.ConsumerConfig)
                   .SetErrorHandler((producer, error) =>
                   {
-                      string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
-                      _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka消费者出错：{errorInfo}");
+                      if (error.IsFatal)
+                      {
+                          string errorInfo = $"Code:{error.Code}, Reason:{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
+                          _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka消费者出错：{errorInfo}");
+                      }
                   })
                   .SetPartitionsRevokedHandler((c, partitions) =>
                   {
