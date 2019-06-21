@@ -205,7 +205,7 @@ namespace Aix.FoundatioEx.Kafka
             var consumer = new ConsumerBuilder<TKey, TValue>(_kafkaOptions.ConsumerConfig)
                   .SetErrorHandler((producer, error) =>
                   {
-                      if (error.IsFatal)
+                      if (error.IsFatal || error.IsBrokerError)
                       {
                           string errorInfo = $"Code:{error.Code}, Reason:{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
                           _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka消费者出错：{errorInfo}");
