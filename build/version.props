@@ -1,5 +1,5 @@
 <Project>
 	<PropertyGroup>
-		<PipelinePackageVersion>0.0.1</PipelinePackageVersion>		
+		<PipelinePackageVersion>1.0.8</PipelinePackageVersion>		
 	</PropertyGroup>
 </Project>
