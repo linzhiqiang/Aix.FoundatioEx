@@ -125,7 +125,7 @@ namespace Aix.FoundatioEx.Kafka
             {
                 return;
             }
-            Count++;
+            
             //消费数据
             await Handler(result);
 
@@ -143,6 +143,7 @@ namespace Aix.FoundatioEx.Kafka
             //处理手动提交
             if (EnableAutoCommit() == false)
             {
+                Count++;
                 var topicPartition = result.TopicPartition;
                 var topicPartitionOffset = new TopicPartitionOffset(topicPartition, result.Offset + 1);
                 AddToOffsetDict(topicPartition, topicPartitionOffset); //加入offset缓存 
@@ -154,6 +155,7 @@ namespace Aix.FoundatioEx.Kafka
                     {
                         this._consumer.Commit(new[] { maxOffset });
                     }, "手动提交偏移量");
+                    Count = 0;
                 }
             }
         }
@@ -222,8 +224,10 @@ namespace Aix.FoundatioEx.Kafka
                           {
                               c.Commit(_offsetDict.Values.Where(x => partitions.Exists(current => current.Topic == x.Topic && current.Partition == x.Partition)));
                               _logger.LogInformation("Kafka再均衡提交");
-                              _offsetDict.Clear();
+                              //_offsetDict.Clear();
+                              ClearTopicDataOffset(partitions.Select(x => x.Topic).Distinct().ToList());
                           }, "Kafka再均衡提交");
+
 
                       }
                   })
@@ -231,7 +235,8 @@ namespace Aix.FoundatioEx.Kafka
                   {
                       if (EnableAutoCommit() == false)
                       {
-                          _offsetDict.Clear();
+                          //_offsetDict.Clear();
+                          ClearTopicDataOffset(partitions.Select(x => x.Topic).Distinct().ToList());
                       }
                       _logger.LogInformation($"MemberId:{c.MemberId}分配的分区：Assigned partitions: [{string.Join(", ", partitions)}]");
                   })
@@ -239,6 +244,21 @@ namespace Aix.FoundatioEx.Kafka
                 .Build();
 
             return consumer;
+        }
+
+        private void ClearTopicDataOffset(List<string> topicList)
+        {
+            foreach (var topic in topicList)
+            {
+                foreach (var item in _offsetDict.ToList())
+                {
+                    if (item.Key.Topic == topic)
+                    {
+                        _offsetDict.TryRemove(item.Key, out TopicPartitionOffset value);
+                    }
+                }
+            }
+
         }
 
         /// <summary>
