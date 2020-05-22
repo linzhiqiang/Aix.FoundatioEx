@@ -130,7 +130,7 @@ namespace Aix.FoundatioEx.Kafka
 
         private async Task Handler(ConsumeResult<Null, MessageBusData> consumeResult)
         {
-            string handlerKey = consumeResult.Value.Type;
+            string handlerKey = consumeResult.Message.Value.Type;
             var hasHandler = _subscriberDict.TryGetValue(handlerKey, out List<SubscriberInfo> list);
             if (!hasHandler || list == null) return;
             foreach (var item in list)
@@ -140,10 +140,10 @@ namespace Aix.FoundatioEx.Kafka
                  {
                      await With.ReTry(_logger, async () =>
                      {
-                         await item.Action(consumeResult.Value.Data, item.CancellationToken);
-                     }, $"消费数据{consumeResult.Value.Type}");
+                         await item.Action(consumeResult.Message.Value.Data, item.CancellationToken);
+                     }, $"消费数据{consumeResult.Message.Value.Type}");
 
-                 }, $"消费数据{consumeResult.Value.Type}");
+                 }, $"消费数据{consumeResult.Message.Value.Type}");
             }
         }
 

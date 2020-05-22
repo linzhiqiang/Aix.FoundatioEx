@@ -7,17 +7,19 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Aix.FoundatioEx.Kafka</PackageId>
     <Authors>linzhiqiang</Authors>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Description>Foundatio的MessageBus的kafka实现
 支持手工提交offset模式
 支持单topic和多topic模式(所有类型消息存储在单个topic或者多个topic)</Description>
-    <PackageProjectUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
-    <PackageReleaseNotes>Confluent.Kafka更新1.0.0版本</PackageReleaseNotes>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageReleaseNotes>升级Confluent.Kafka版本v1.3.0</PackageReleaseNotes>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="1.0.1.1" />
+    <PackageReference Include="Confluent.Kafka" Version="1.4.0" />
     <PackageReference Include="Foundatio" Version="8.0.1965" />
   </ItemGroup>
 
