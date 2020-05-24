@@ -10,8 +10,9 @@ fi
 
 mkdir -p $artifactsFolder
 
-dotnet restore ./Aix.FoundatioEx.sln
-dotnet build ./Aix.FoundatioEx.sln -c Release
 
+dotnet build ./src/Aix.FoundatioEx.Kafka/Aix.FoundatioEx.Kafka.csproj -c Release
 
 dotnet pack ./src/Aix.FoundatioEx.Kafka/Aix.FoundatioEx.Kafka.csproj -c Release -o $artifactsFolder
+
+dotnet nuget push ./$artifactsFolder/Aix.FoundatioEx.Kafka.*.nupkg -k $PRIVATE_NUGET_KEY -s http://192.168.102.34:8081/repository/nuget-hosted

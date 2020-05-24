@@ -19,6 +19,7 @@ namespace Aix.FoundatioEx.Kafka
         private IServiceProvider _serviceProvider;
         private ILogger<KafkaProducer<TKey, TValue>> _logger;
         private KafkaMessageBusOptions _kafkaOptions;
+        private static TimeSpan DefaultTimeout = TimeSpan.FromSeconds(5);
 
         IProducer<TKey, TValue> _producer = null;
         public KafkaProducer(IServiceProvider serviceProvider)
@@ -30,18 +31,42 @@ namespace Aix.FoundatioEx.Kafka
 
             this.CreateProducer();
         }
-
         public Task<DeliveryResult<TKey, TValue>> ProduceAsync(string topic, Message<TKey, TValue> message)
         {
             return this._producer.ProduceAsync(topic, message);
         }
+
+        /// <summary>
+        /// 事务版本   貌似没必要 要求 配置TransactionalId，Acks必须等于all
+        /// </summary>
+        /// <param name="topic"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public async Task<DeliveryResult<TKey, TValue>> ProduceAsync2(string topic, Message<TKey, TValue> message)
+        {
+            DeliveryResult<TKey, TValue> result = null;
+            try
+            {
+                _producer.InitTransactions(DefaultTimeout);
+                _producer.BeginTransaction();
+                result = await this._producer.ProduceAsync(topic, message);
+                _producer.CommitTransaction(DefaultTimeout);
+            }
+            catch (Exception)
+            {
+                _producer.AbortTransaction(DefaultTimeout);
+                throw;
+            }
+            return result;
+        }
+
 
         public void Dispose()
         {
             _logger.LogInformation("Kafka关闭生产者");
             if (this._producer != null)
             {
-                With.NoException(_logger, () => { this._producer.Dispose(); }, "关闭生产者");
+                With.NoException(_logger, () => { this._producer.Dispose(); }, "Kafka关闭生产者");
             }
         }
 
@@ -62,25 +87,26 @@ namespace Aix.FoundatioEx.Kafka
                 }
                 if (string.IsNullOrEmpty(_kafkaOptions.ProducerConfig.BootstrapServers))
                 {
-                    throw new Exception("BootstrapServers参数");
+                    throw new Exception("kafka BootstrapServers参数");
                 }
                 IProducer<TKey, TValue> producer = new ProducerBuilder<TKey, TValue>(_kafkaOptions.ProducerConfig)
-            .SetErrorHandler((p, error) =>
-            {
-                if (error.IsFatal)
+                .SetErrorHandler((p, error) =>
                 {
-                    string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
-                    _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka生产者出错：{errorInfo}");
-                }
-            })
-           .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
-           .Build();
+                    if (error.IsFatal)
+                    {
+                        string errorInfo = $"{error.Code}-{error.Reason}, IsFatal={error.IsFatal}, IsLocalError:{error.IsLocalError}, IsBrokerError:{error.IsBrokerError}";
+                        _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka生产者出错：{errorInfo}");
+                    }
+                })
+               .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
+               .Build();
 
                 this._producer = producer;
             }
         }
 
         #endregion
+
 
     }
 }

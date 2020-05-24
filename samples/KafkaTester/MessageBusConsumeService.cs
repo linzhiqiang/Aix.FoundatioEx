@@ -1,4 +1,5 @@
-﻿using Foundatio.Messaging;
+﻿using Aix.FoundatioEx.Kafka;
+using Foundatio.Messaging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -26,9 +27,7 @@ namespace KafkaTester
             Task.Run(async () =>
             {
                 List<Task> taskList = new List<Task>(); //多个订阅者
-                taskList.Add(Test(cancellationToken));
-                //taskList.Add(Test(cancellationToken));
-
+                taskList.Add(Consume(cancellationToken));
                 await Task.WhenAll(taskList.ToArray());
             });
 
@@ -40,23 +39,26 @@ namespace KafkaTester
             return Task.CompletedTask;
         }
 
-        private async Task Test(CancellationToken cancellationToken)
+        private async Task Consume(CancellationToken cancellationToken)
         {
+            MessageBusContext context = new MessageBusContext();
+            context.Config.Add(MessageBusContextConstant.GroupId, "group1"); //kafka消费者组(只有kafka使用)
+            context.Config.Add(MessageBusContextConstant.ConsumerThreadCount, "4");//该订阅的消费线程数，若是kafka注意和分区数匹配
             await _messageBus.SubscribeAsync<KafkaMessage>(async (message) =>
             {
                 var current = Interlocked.Increment(ref Count);
                 //if (current % 10000 == 0)
-                    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
+                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
                 //await Task.Delay(100);
                 await Task.CompletedTask;
-            }, cancellationToken);
+            }, context);
 
 
             await _messageBus.SubscribeAsync<KafkaMessage2>(async (message) =>
             {
                 var current = Interlocked.Increment(ref Count);
                 //if (current % 10000 == 0)
-                    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
+                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
                 //await Task.Delay(100);
                 await Task.CompletedTask;
             }, cancellationToken);
