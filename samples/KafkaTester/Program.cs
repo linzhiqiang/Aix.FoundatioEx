@@ -16,6 +16,14 @@ namespace KafkaTester
    dotnet run -m 3 -q 100 //生产者消费者一起测试
     */
 
+    [Flags]
+    public enum ClientMode
+    {
+        Producer = 1,
+        Consumer = 2,
+        Both = 3
+    }
+
     /// <summary>
     /// 组件 commandlineparser
     /// </summary>
@@ -53,7 +61,6 @@ namespace KafkaTester
                     services.AddSingleton<CmdOptions>(options);
 
                    var kafkaMessageBusOptions=  context.Configuration.GetSection("kafka").Get<KafkaMessageBusOptions>();
-                    kafkaMessageBusOptions.ClientMode = options.Mode;//这里方便测试，以命令行参数为准
                     services.AddKafkaMessageBus(kafkaMessageBusOptions);
 
                    // AddKafkaMessageBus(services);
@@ -76,10 +83,9 @@ namespace KafkaTester
                                                                                                     // bootstrapServers = "192.168.72.130:9092,192.168.72.130:9093,192.168.72.130:9094";//home 虚拟机
             var options = new KafkaMessageBusOptions
             {
-                ClientMode = ClientMode.Both,
                 TopicPrefix = "KafkaDemo", //项目名称
                 //TopicMode = TopicMode.Single,
-                ConsumerThreadCount = 4,
+                DefaultConsumerThreadCount = 4,
                 ManualCommitBatch = 10,
                 ProducerConfig = new ProducerConfig
                 {

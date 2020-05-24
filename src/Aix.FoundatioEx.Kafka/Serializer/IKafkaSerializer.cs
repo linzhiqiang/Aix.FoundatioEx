@@ -15,7 +15,7 @@ namespace Aix.FoundatioEx.Kafka
     /// <summary>
     /// 默认采用MessagePackSerializer
     /// </summary>
-    internal class DefaultKafkaSerializer : IKafkaSerializer
+    internal class MessagePackSerializer : IKafkaSerializer
     {
         private Foundatio.Serializer.ISerializer _serializer = new Foundatio.Serializer.MessagePackSerializer();
         private static byte[] EmptyBytes = new byte[0];

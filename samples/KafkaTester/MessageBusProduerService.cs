@@ -26,13 +26,13 @@ namespace KafkaTester
         {
             Task.Run(() =>
             {
-                return Test(cancellationToken);
+                return Producer(cancellationToken);
             });
 
-            //Task.Run(() =>
-            //{
-            //    return Test2(cancellationToken);
-            //});
+            Task.Run(() =>
+            {
+                return Producer2(cancellationToken);
+            });
 
             return Task.CompletedTask;
         }
@@ -42,7 +42,7 @@ namespace KafkaTester
             return Task.CompletedTask;
         }
 
-        private async Task Test(CancellationToken cancellationToken)
+        private async Task Producer(CancellationToken cancellationToken)
         {
             int producerCount = _cmdOptions.Count > 0 ? _cmdOptions.Count : 1;
             var duration = Stopwatch.StartNew();
@@ -62,7 +62,7 @@ namespace KafkaTester
             _logger.LogInformation($"生产效率={producerCount * 1.0 / totalSecond}");
         }
 
-        private async Task Test2(CancellationToken cancellationToken)
+        private async Task Producer2(CancellationToken cancellationToken)
         {
             int producerCount = _cmdOptions.Count > 0 ? _cmdOptions.Count : 1;
             var duration = Stopwatch.StartNew();
