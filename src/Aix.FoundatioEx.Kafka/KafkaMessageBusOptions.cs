@@ -11,7 +11,7 @@ namespace Aix.FoundatioEx.Kafka
         public KafkaMessageBusOptions()
         {
             // this.TopicPrefix = "kafka-messagebus-";
-            this.Serializer = new Aix.FoundatioEx.Kafka.MessagePackSerializer();
+            this.Serializer = new MessagePackSerializer();
             this.DefaultConsumerThreadCount = 4;
             this.ManualCommitBatch = 100;
             this.ManualCommitIntervalSecond = 0;
@@ -31,7 +31,7 @@ namespace Aix.FoundatioEx.Kafka
         /// <summary>
         /// 自定义序列化，默认为MessagePack
         /// </summary>
-        public IKafkaSerializer Serializer { get; set; }
+        public ISerializer Serializer { get; set; }
 
         /// <summary>
         /// 每个类型的消费线程数 默认4个

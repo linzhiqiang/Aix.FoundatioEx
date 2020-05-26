@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Aix.FoundatioEx.Kafka
 {
-    class KafkaMessageBus : IMessageBus
+    public class KafkaMessageBus : IMessageBus
     {
         #region 属性 构造
         private IServiceProvider _serviceProvider;

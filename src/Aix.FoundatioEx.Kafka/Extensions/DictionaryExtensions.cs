@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Aix.FoundatioEx.Kafka.Extensions
 {
-    public static class DictionaryExtensions
+    internal static class DictionaryExtensions
     {
         public static void AddOrUpdate<K, V>(this IDictionary<K, V> dict, K key, V value)
         {
