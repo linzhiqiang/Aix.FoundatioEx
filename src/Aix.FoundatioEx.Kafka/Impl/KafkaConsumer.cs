@@ -255,7 +255,7 @@ namespace Aix.FoundatioEx.Kafka
                 config["group.id"] = groupId;
             }
 
-            var consumer = new ConsumerBuilder<TKey, TValue>(config)
+            var builder = new ConsumerBuilder<TKey, TValue>(config)
                  .SetErrorHandler((producer, error) =>
                  {
                      if (error.IsFatal || error.IsBrokerError)
@@ -282,9 +282,20 @@ namespace Aix.FoundatioEx.Kafka
                      }
                      _logger.LogInformation($"MemberId:{c.MemberId}分配的分区：Assigned partitions: [{string.Join(", ", partitions)}]");
                  })
-               .SetValueDeserializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
-               .Build();
+               .SetValueDeserializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer));
 
+            //以下是内置的
+            //if (typeof(TKey) == typeof(Null)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Null);
+            //if (typeof(TKey) == typeof(string)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Utf8);
+            //if (typeof(TKey) == typeof(int)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Int32);
+            //if (typeof(TKey) == typeof(long)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Int64);
+            //if (typeof(TKey) == typeof(float)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Single);
+            //if (typeof(TKey) == typeof(double)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Double);
+            //if (typeof(TKey) == typeof(byte[])) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.ByteArray);
+            //if (typeof(TKey) == typeof(Ignore)) builder.SetKeyDeserializer((IDeserializer<TKey>)Confluent.Kafka.Deserializers.Ignore);
+            //if (typeof(TKey) == typeof(object)) builder.SetKeyDeserializer(new ConfluentKafkaSerializerAdapter<TKey>(_kafkaOptions.Serializer));
+
+            var consumer = builder.Build();
             return consumer;
         }
 

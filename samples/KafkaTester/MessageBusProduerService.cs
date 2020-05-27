@@ -1,4 +1,5 @@
 ﻿using Foundatio.Messaging;
+using KafkaTester.Model;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;

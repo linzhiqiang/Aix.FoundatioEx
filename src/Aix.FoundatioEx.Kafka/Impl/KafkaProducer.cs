@@ -89,7 +89,7 @@ namespace Aix.FoundatioEx.Kafka
                 {
                     throw new Exception("kafka BootstrapServers参数");
                 }
-                IProducer<TKey, TValue> producer = new ProducerBuilder<TKey, TValue>(_kafkaOptions.ProducerConfig)
+                var builder = new ProducerBuilder<TKey, TValue>(_kafkaOptions.ProducerConfig)
                 .SetErrorHandler((p, error) =>
                 {
                     if (error.IsFatal)
@@ -98,10 +98,19 @@ namespace Aix.FoundatioEx.Kafka
                         _logger.LogError($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}Kafka生产者出错：{errorInfo}");
                     }
                 })
-               .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer))
-               .Build();
+               .SetValueSerializer(new ConfluentKafkaSerializerAdapter<TValue>(_kafkaOptions.Serializer));
 
-                this._producer = producer;
+                //以下是内置的
+                //if (typeof(TKey) == typeof(Null)) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.Null);
+                //if (typeof(TKey) == typeof(string)) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.Utf8);
+                //if (typeof(TKey) == typeof(int)) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.Int32);
+                //if (typeof(TKey) == typeof(long)) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.Int64);
+                //if (typeof(TKey) == typeof(float)) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.Single);
+                //if (typeof(TKey) == typeof(double)) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.Double);
+                //if (typeof(TKey) == typeof(byte[])) builder.SetKeySerializer((ISerializer<TKey>)Confluent.Kafka.Serializers.ByteArray);
+                //if (typeof(TKey) == typeof(object)) builder.SetKeySerializer(new ConfluentKafkaSerializerAdapter<TKey>(_kafkaOptions.Serializer));
+
+                this._producer = builder.Build();
             }
         }
 

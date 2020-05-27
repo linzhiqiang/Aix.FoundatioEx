@@ -7,6 +7,7 @@ using Confluent.Kafka;
 using Aix.FoundatioEx.Kafka;
 using CommandLine;
 using Microsoft.Extensions.Configuration;
+using KafkaTester.Model;
 
 namespace KafkaTester
 {
@@ -15,26 +16,7 @@ namespace KafkaTester
    dotnet run -m 2  //消费者测试
    dotnet run -m 3 -q 100 //生产者消费者一起测试
     */
-
-    [Flags]
-    public enum ClientMode
-    {
-        Producer = 1,
-        Consumer = 2,
-        Both = 3
-    }
-
-    /// <summary>
-    /// 组件 commandlineparser
-    /// </summary>
-    public class CmdOptions
-    {
-        [Option('m', "mode", Required = false, Default =2, HelpText = "1=生产者测试，2=消费者测试,3=同时测试")]
-        public ClientMode Mode { get; set; }
-
-        [Option('q', "quantity", Required = false, Default =1, HelpText = "测试生产数量")]
-        public int Count { get; set; }
-    }
+    
     class Program
     {
         static void Main(string[] args)
@@ -63,7 +45,6 @@ namespace KafkaTester
                    var kafkaMessageBusOptions=  context.Configuration.GetSection("kafka").Get<KafkaMessageBusOptions>();
                     services.AddKafkaMessageBus(kafkaMessageBusOptions);
 
-                   // AddKafkaMessageBus(services);
                     if ((options.Mode & ClientMode.Consumer) > 0)
                     {
                         services.AddHostedService<MessageBusConsumeService>();
@@ -80,7 +61,7 @@ namespace KafkaTester
         private static void AddKafkaMessageBus(IServiceCollection services)
         {
             var bootstrapServers = "192.168.111.132:9092,192.168.111.132:9093,192.168.111.132:9094";// com 虚拟机
-                                                                                                    // bootstrapServers = "192.168.72.130:9092,192.168.72.130:9093,192.168.72.130:9094";//home 虚拟机
+          // bootstrapServers = "192.168.72.130:9092,192.168.72.130:9093,192.168.72.130:9094";//home 虚拟机
             var options = new KafkaMessageBusOptions
             {
                 TopicPrefix = "KafkaDemo", //项目名称

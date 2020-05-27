@@ -1,4 +1,5 @@
 ﻿using Aix.FoundatioEx.Kafka;
+using Aix.FoundatioEx.Kafka.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Foundatio.Messaging
         /// <param name="context"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task SubscribeAsync<T>(this IMessageBus messageBus, Func<T, Task> handler, MessageBusContext context = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class
+        public static Task SubscribeAsync<T>(this IMessageBus messageBus, Func<T, Task> handler, SubscribeOptions subscribeOptions = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class
         {
             if (messageBus is InMemoryMessageBus)
             {
@@ -29,7 +30,7 @@ namespace Foundatio.Messaging
                 return (messageBus as KafkaMessageBus).SubscribeExAsync<T>((message, token) =>
                 {
                     return handler(message);
-                }, context, cancellationToken);
+                }, subscribeOptions, cancellationToken);
             }
             else
             {
