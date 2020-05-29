@@ -82,7 +82,7 @@ namespace Aix.FoundatioEx.Kafka
                     {
                         try
                         {
-                            await Consumer();
+                            await Consumer(cancellationToken);
                         }
                         catch (ConsumeException ex)
                         {
@@ -112,11 +112,11 @@ namespace Aix.FoundatioEx.Kafka
             return Task.CompletedTask;
         }
 
-        private async Task Consumer()
+        private async Task Consumer(CancellationToken cancellationToken)
         {
             try
             {
-                var result = this._consumer.Consume(TimeSpan.FromSeconds(1));
+                var result = this._consumer.Consume(cancellationToken);//默认100毫秒
                 //这里处理超时提交
                 // if (result == null || result.IsPartitionEOF || result.Value == null)
                 if (result == null || result.IsPartitionEOF || result.Message == null || result.Message.Value == null)
