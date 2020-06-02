@@ -12,6 +12,7 @@
 支持手工提交offset模式（根据批量和时间）
 支持根据分组订阅
 支持根据key路由到固定分区
+支持根据key路由到固定分区
 </Description>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
