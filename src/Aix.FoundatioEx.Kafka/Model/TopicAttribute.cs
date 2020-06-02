@@ -21,4 +21,6 @@ namespace Aix.FoundatioEx.Kafka.Model
             return attrs != null && attrs.Length > 0 ? attrs[0] as TopicAttribute : null;
         }
     }
+
+   
 }

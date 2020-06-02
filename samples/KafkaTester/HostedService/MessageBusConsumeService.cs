@@ -1,4 +1,5 @@
 ﻿using Aix.FoundatioEx.Kafka;
+using Aix.FoundatioEx.Kafka.Model;
 using Foundatio.Messaging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,16 +23,12 @@ namespace KafkaTester
             _messageBus = messageBus;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            Task.Run(async () =>
-            {
-                List<Task> taskList = new List<Task>(); //多个订阅者
-                taskList.Add(Consume(cancellationToken));
-                await Task.WhenAll(taskList.ToArray());
-            });
+            List<Task> taskList = new List<Task>(); //多个订阅者
+            taskList.Add(Consume(cancellationToken));
+            await Task.WhenAll(taskList.ToArray());
 
-            return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -41,9 +38,10 @@ namespace KafkaTester
 
         private async Task Consume(CancellationToken cancellationToken)
         {
-            MessageBusContext context = new MessageBusContext();
-            context.Config.Add(MessageBusContextConstant.GroupId, "group1"); //kafka消费者组(只有kafka使用)
-            context.Config.Add(MessageBusContextConstant.ConsumerThreadCount, "4");//该订阅的消费线程数，若是kafka注意和分区数匹配
+            SubscribeOptions subscribeOptions = new SubscribeOptions();
+            subscribeOptions.GroupId = "group1";
+            subscribeOptions.ConsumerThreadCount = 4;
+           
             await _messageBus.SubscribeAsync<KafkaMessage>(async (message) =>
             {
                 var current = Interlocked.Increment(ref Count);
@@ -51,17 +49,17 @@ namespace KafkaTester
                 _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
                 //await Task.Delay(100);
                 await Task.CompletedTask;
-            }, context);
+            }, subscribeOptions);
 
 
-            await _messageBus.SubscribeAsync<KafkaMessage2>(async (message) =>
-            {
-                var current = Interlocked.Increment(ref Count);
-                //if (current % 10000 == 0)
-                _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
-                //await Task.Delay(100);
-                await Task.CompletedTask;
-            }, cancellationToken);
+            //await _messageBus.SubscribeAsync<KafkaMessage2>(async (message) =>
+            //{
+            //    var current = Interlocked.Increment(ref Count);
+            //    //if (current % 10000 == 0)
+            //    _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
+            //    //await Task.Delay(100);
+            //    await Task.CompletedTask;
+            //}, cancellationToken);
         }
     }
 }

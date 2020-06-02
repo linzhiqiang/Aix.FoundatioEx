@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Aix.FoundatioEx.Kafka
 {
-    public interface IKafkaSerializer
+    public interface ISerializer
     {
         byte[] Serialize<T>(T data);
 
@@ -15,7 +15,7 @@ namespace Aix.FoundatioEx.Kafka
     /// <summary>
     /// 默认采用MessagePackSerializer
     /// </summary>
-    internal class MessagePackSerializer : IKafkaSerializer
+    internal class MessagePackSerializer : ISerializer
     {
         private Foundatio.Serializer.ISerializer _serializer = new Foundatio.Serializer.MessagePackSerializer();
         private static byte[] EmptyBytes = new byte[0];

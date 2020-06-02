@@ -9,8 +9,8 @@ namespace Aix.FoundatioEx.Kafka
     /// <typeparam name="T"></typeparam>
     internal class ConfluentKafkaSerializerAdapter<T> : Confluent.Kafka.ISerializer<T>, Confluent.Kafka.IDeserializer<T>
     {
-        private IKafkaSerializer _kafkaSerializer;
-        public ConfluentKafkaSerializerAdapter(IKafkaSerializer kafkaSerializer)
+        private ISerializer _kafkaSerializer;
+        public ConfluentKafkaSerializerAdapter(ISerializer kafkaSerializer)
         {
             _kafkaSerializer = kafkaSerializer;
         }

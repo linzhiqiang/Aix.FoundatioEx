@@ -11,6 +11,7 @@ namespace KafkaTester
     [TopicAttribute(Name = "relic-queue-task")]
     public class KafkaMessage
     {
+        [RouteKeyAttribute]
         public string MessageId { get; set; }
         public string Content { get; set; }
 
