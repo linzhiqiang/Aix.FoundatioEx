@@ -23,19 +23,12 @@ namespace KafkaTester
             _cmdOptions = cmdOptions;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            Task.Run(() =>
-            {
-                return Producer(cancellationToken);
-            });
-
-            Task.Run(() =>
-            {
-                return Producer2(cancellationToken);
-            });
-
-            return Task.CompletedTask;
+            List<Task> taskList = new List<Task>(); 
+            taskList.Add(Producer(cancellationToken));
+            taskList.Add(Producer2(cancellationToken));
+            await Task.WhenAll(taskList.ToArray());
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

@@ -23,5 +23,7 @@ namespace KafkaTester.Model
 
         [Option('q', "quantity", Required = false, Default = 1, HelpText = "测试生产数量")]
         public int Count { get; set; }
+
+        public static CmdOptions Options;
     }
 }

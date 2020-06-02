@@ -42,15 +42,20 @@ namespace Aix.FoundatioEx.Kafka
             _kafkaOptions = serviceProvider.GetService<KafkaMessageBusOptions>();
         }
 
-        public Task Subscribe(string topic, string groupId, CancellationToken cancellationToken)
+        public async Task Subscribe(string topic, string groupId, CancellationToken cancellationToken)
         {
-            return Task.Run(async () =>
-            {
-                _isStart = true;
-                this._consumer = this.CreateConsumer(groupId);
-                this._consumer.Subscribe(topic);
-                await StartPoll(cancellationToken);
-            });
+            _isStart = true;
+            this._consumer = this.CreateConsumer(groupId);
+            this._consumer.Subscribe(topic);
+            await StartPoll(cancellationToken);
+
+            //return Task.Run(async () =>
+            //{
+            //    _isStart = true;
+            //    this._consumer = this.CreateConsumer(groupId);
+            //    this._consumer.Subscribe(topic);
+            //    await StartPoll(cancellationToken);
+            //});
         }
 
         public void Close()
