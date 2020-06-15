@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aix.KafkaMessageBus" Version="1.0.0" />
+    <PackageReference Include="Foundatio" Version="8.0.1965" />
+  </ItemGroup>
+
+</Project>

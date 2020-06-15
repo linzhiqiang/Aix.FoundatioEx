@@ -1,7 +1,6 @@
-﻿using Aix.FoundatioEx.Kafka.Model;
+﻿
+using Aix.FoundatioEx.Kafka.Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KafkaTester
 {

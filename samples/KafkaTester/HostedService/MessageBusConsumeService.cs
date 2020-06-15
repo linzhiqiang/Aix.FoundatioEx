@@ -1,11 +1,8 @@
-﻿using Aix.FoundatioEx.Kafka;
-using Aix.FoundatioEx.Kafka.Model;
-using Foundatio.Messaging;
+﻿using Foundatio.Messaging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,9 +35,9 @@ namespace KafkaTester
 
         private async Task Consume(CancellationToken cancellationToken)
         {
-            SubscribeOptions subscribeOptions = new SubscribeOptions();
-            subscribeOptions.GroupId = "group1";
-            subscribeOptions.ConsumerThreadCount = 4;
+            //SubscribeOptions subscribeOptions = new SubscribeOptions();
+            //subscribeOptions.GroupId = "group1";
+            //subscribeOptions.ConsumerThreadCount = 4;
            
             await _messageBus.SubscribeAsync<KafkaMessage>(async (message) =>
             {
@@ -49,7 +46,7 @@ namespace KafkaTester
                 _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")}消费数据：MessageId={message.MessageId},Content={message.Content},count={current}");
                 //await Task.Delay(100);
                 await Task.CompletedTask;
-            }, subscribeOptions);
+            });
 
 
             //await _messageBus.SubscribeAsync<KafkaMessage2>(async (message) =>
