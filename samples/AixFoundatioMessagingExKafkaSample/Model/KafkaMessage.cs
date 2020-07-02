@@ -1,13 +1,15 @@
 ﻿
-using Aix.FoundatioEx.Kafka.Model;
+using Aix.KafkaMessageBus.Model;
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace KafkaTester
+namespace AixFoundatioMessagingExKafkaSample
 {
     /// <summary>
     /// 具体业务消息
     /// </summary>
-    [TopicAttribute(Name = "relic-queue-task")]
+   // [TopicAttribute(Name = "relic-queue-task")]
+    [DisplayAttribute(Name = "relic-queue-task")]
     public class KafkaMessage
     {
         [RouteKeyAttribute]

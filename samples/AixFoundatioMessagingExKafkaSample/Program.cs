@@ -1,15 +1,9 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
+﻿using CommandLine;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Foundatio.Messaging;
-using Confluent.Kafka;
-using Aix.FoundatioEx.Kafka;
-using CommandLine;
-using Microsoft.Extensions.Configuration;
-using KafkaTester.Model;
+using System;
 
-namespace KafkaTester
+namespace AixFoundatioMessagingExKafkaSample
 {
     /*
    dotnet run -m 1 -q 100  //生产者测试

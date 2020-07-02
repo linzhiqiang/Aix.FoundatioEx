@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1D848CD5-0152-4E02-835F-A2BB1A5E4C12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaTester", "samples\KafkaTester\KafkaTester.csproj", "{48F1B03F-06B6-49B1-BE8B-7E2532986C8F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2B104CBE-574F-47F3-BE6B-DEF5BE240322}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aix.FoundatioEx.Kafka", "src\Aix.FoundatioEx.Kafka\Aix.FoundatioEx.Kafka.csproj", "{0A6E8641-C3F5-48F5-85DC-81DD1FD0ABAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aix.FoundatioMessagingEx.Kafka", "src\Aix.FoundatioMessagingEx.Kafka\Aix.FoundatioMessagingEx.Kafka.csproj", "{2CACFE6C-C3C0-4488-9868-FF5F16D9DD6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aix.FoundatioEx2.Kafka", "src\Aix.Foundatio.Kafka\Aix.FoundatioEx2.Kafka.csproj", "{E3202815-3B2E-4766-BBE6-10DCC214B612}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AixFoundatioMessagingExKafkaSample", "samples\AixFoundatioMessagingExKafkaSample\AixFoundatioMessagingExKafkaSample.csproj", "{FA5DB866-3419-4677-A701-6B9D86382AF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,24 +17,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{48F1B03F-06B6-49B1-BE8B-7E2532986C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48F1B03F-06B6-49B1-BE8B-7E2532986C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48F1B03F-06B6-49B1-BE8B-7E2532986C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48F1B03F-06B6-49B1-BE8B-7E2532986C8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A6E8641-C3F5-48F5-85DC-81DD1FD0ABAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A6E8641-C3F5-48F5-85DC-81DD1FD0ABAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A6E8641-C3F5-48F5-85DC-81DD1FD0ABAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A6E8641-C3F5-48F5-85DC-81DD1FD0ABAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3202815-3B2E-4766-BBE6-10DCC214B612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3202815-3B2E-4766-BBE6-10DCC214B612}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3202815-3B2E-4766-BBE6-10DCC214B612}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3202815-3B2E-4766-BBE6-10DCC214B612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CACFE6C-C3C0-4488-9868-FF5F16D9DD6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CACFE6C-C3C0-4488-9868-FF5F16D9DD6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CACFE6C-C3C0-4488-9868-FF5F16D9DD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CACFE6C-C3C0-4488-9868-FF5F16D9DD6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA5DB866-3419-4677-A701-6B9D86382AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA5DB866-3419-4677-A701-6B9D86382AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA5DB866-3419-4677-A701-6B9D86382AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA5DB866-3419-4677-A701-6B9D86382AF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{48F1B03F-06B6-49B1-BE8B-7E2532986C8F} = {1D848CD5-0152-4E02-835F-A2BB1A5E4C12}
+		{2CACFE6C-C3C0-4488-9868-FF5F16D9DD6D} = {2B104CBE-574F-47F3-BE6B-DEF5BE240322}
+		{FA5DB866-3419-4677-A701-6B9D86382AF9} = {1D848CD5-0152-4E02-835F-A2BB1A5E4C12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B607F327-7DC6-4D89-A1B0-926E3EF7D3AF}

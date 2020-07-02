@@ -14,4 +14,4 @@ dotnet restore ./Aix.FoundatioEx.sln
 dotnet build ./Aix.FoundatioEx.sln -c Release
 
 
-dotnet pack ./src/Aix.FoundatioEx.Kafka/Aix.FoundatioEx.Kafka.csproj -c Release -o $artifactsFolder
+dotnet pack ./src/Aix.FoundatioMessagingEx.Kafka/Aix.FoundatioMessagingEx.Kafka.csproj -c Release -o $artifactsFolder

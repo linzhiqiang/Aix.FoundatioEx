@@ -1,13 +1,11 @@
-﻿using Aix.FoundatioEx.Kafka;
-using KafkaTester.Model;
+﻿
+using Aix.FoundatioMessagingEx.Kafka;
+using Aix.KafkaMessageBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace KafkaTester
+namespace AixFoundatioMessagingExKafkaSample
 {
     public class Startup
     {
@@ -16,7 +14,7 @@ namespace KafkaTester
             var options = CmdOptions.Options;
             services.AddSingleton(options);
             var kafkaMessageBusOptions = context.Configuration.GetSection("kafka").Get<KafkaMessageBusOptions>();
-            services.AddKafkaMessageBus(kafkaMessageBusOptions);
+            services.AddFoundatioKafkaMessageBus(kafkaMessageBusOptions);
 
             if ((options.Mode & ClientMode.Consumer) > 0)
             {

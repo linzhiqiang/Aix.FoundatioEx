@@ -1,5 +1,4 @@
 ﻿using Foundatio.Messaging;
-using KafkaTester.Model;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KafkaTester
+namespace AixFoundatioMessagingExKafkaSample
 {
     public class MessageBusProduerService : IHostedService
     {
@@ -27,7 +26,7 @@ namespace KafkaTester
         {
             List<Task> taskList = new List<Task>(); 
             taskList.Add(Producer(cancellationToken));
-            taskList.Add(Producer2(cancellationToken));
+           // taskList.Add(Producer2(cancellationToken));
             await Task.WhenAll(taskList.ToArray());
         }
 

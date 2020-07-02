@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KafkaTester.Model
+namespace AixFoundatioMessagingExKafkaSample
 {
     [Flags]
     public enum ClientMode

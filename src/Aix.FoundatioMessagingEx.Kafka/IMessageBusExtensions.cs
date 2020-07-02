@@ -1,12 +1,11 @@
-﻿using Aix.FoundatioEx.Kafka;
-using Aix.FoundatioEx.Kafka.Model;
+﻿using Foundatio.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foundatio.Messaging
+namespace Aix.FoundatioMessagingEx.Kafka
 {
     public static class IMessageBusExtensions
     {
@@ -19,22 +18,22 @@ namespace Foundatio.Messaging
         /// <param name="context"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task SubscribeAsync<T>(this IMessageBus messageBus, Func<T, Task> handler, SubscribeOptions subscribeOptions = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class
+        public static Task SubscribeAsync<T>(this IMessageBus messageBus, Func<T, Task> handler, KafkaMessageBus.Model.SubscribeOptions subscribeOptions = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class
         {
-            if (messageBus is InMemoryMessageBus)
+            //if (messageBus is InMemoryMessageBus)
+            //{
+            //    return messageBus.SubscribeAsync<T>(handler, cancellationToken);
+            //}
+            if (messageBus is KafkaMessageBusAdapter)
             {
-                return messageBus.SubscribeAsync<T>(handler, cancellationToken);
-            }
-            else if (messageBus is KafkaMessageBus)
-            {
-                return (messageBus as KafkaMessageBus).SubscribeExAsync<T>((message, token) =>
+                return (messageBus as KafkaMessageBusAdapter).SubscribeAsync<T>((message, token) =>
                 {
                     return handler(message);
                 }, subscribeOptions, cancellationToken);
             }
             else
             {
-                throw new NotImplementedException("未实现该方法");
+                return messageBus.SubscribeAsync<T>(handler, cancellationToken);
             }
         }
     }

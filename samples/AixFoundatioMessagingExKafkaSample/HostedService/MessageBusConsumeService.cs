@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KafkaTester
+namespace AixFoundatioMessagingExKafkaSample
 {
     public class MessageBusConsumeService : IHostedService
     {

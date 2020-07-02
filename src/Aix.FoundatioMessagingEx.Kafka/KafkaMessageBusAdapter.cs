@@ -3,12 +3,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aix.FoundatioEx.Kafka
+namespace Aix.FoundatioMessagingEx.Kafka
 {
     public class KafkaMessageBusAdapter : IMessageBus
     {
-        Aix.KafkaMessageBus.IMessageBus _messageBus;
-        public KafkaMessageBusAdapter(Aix.KafkaMessageBus.IMessageBus messageBus)
+        Aix.KafkaMessageBus.IKafkaMessageBus _messageBus;
+        public KafkaMessageBusAdapter(Aix.KafkaMessageBus.IKafkaMessageBus messageBus)
         {
             _messageBus = messageBus;
         }
