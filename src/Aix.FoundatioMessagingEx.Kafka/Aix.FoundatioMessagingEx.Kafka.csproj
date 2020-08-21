@@ -7,10 +7,12 @@
 支持根据分组订阅
 通过Aix.KafkaMessageBus组件实现</Description>
     <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>升级组件</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aix.KafkaMessageBus" Version="1.0.2" />
+    <PackageReference Include="Aix.KafkaMessageBus" Version="1.0.6" />
     <PackageReference Include="Foundatio" Version="8.1.2058" />
   </ItemGroup>
 
