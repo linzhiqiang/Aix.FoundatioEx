@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Foundatio的MessageBus的kafka实现
+兼容standard2.0
 支持手工提交offset模式（根据批量和时间）
 支持根据分组订阅
 通过Aix.KafkaMessageBus组件实现</Description>
     <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
-    <Version>1.0.7</Version>
-    <PackageReleaseNotes>upgrade  Foundatio to 10.0.1</PackageReleaseNotes>
+    <Version>1.0.8</Version>
+    <PackageReleaseNotes>兼容standard2.0</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aix.KafkaMessageBus" Version="1.0.8" />
+    <PackageReference Include="Aix.KafkaMessageBus" Version="1.0.9" />
     <PackageReference Include="Foundatio" Version="10.0.1" />
   </ItemGroup>
 
