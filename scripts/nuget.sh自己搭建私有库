@@ -15,4 +15,4 @@ dotnet build ./src/Aix.FoundatioMessagingEx.Kafka/Aix.FoundatioMessagingEx.Kafka
 
 dotnet pack ./src/Aix.FoundatioMessagingEx.Kafka/Aix.FoundatioMessagingEx.Kafka.csproj -c Release -o $artifactsFolder
 
-dotnet nuget push ./$artifactsFolder/Aix.FoundatioMessagingEx.Kafka.*.nupkg -k $PRIVATE_NUGET_KEY -s http://192.168.102.34:8081/repository/nuget-hosted
+dotnet nuget push ./$artifactsFolder/Aix.FoundatioMessagingEx.Kafka.*.nupkg -k $PRIVATE_NUGET_KEY -s https://www.nuget.org
