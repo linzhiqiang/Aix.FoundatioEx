@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Aix.FoundatioMessagingEx.Kafka</name>
+    </assembly>
+    <members>
+        <member name="M:Aix.FoundatioMessagingEx.Kafka.IMessageBusExtensions.SubscribeAsync``1(Foundatio.Messaging.IMessageBus,System.Func{``0,System.Threading.Tasks.Task},Aix.KafkaMessageBus.Model.SubscribeOptions,System.Threading.CancellationToken)">
+            <summary>
+            订阅 支持传递自定义参数 弥补Foundatio.Messaging.IMessageBus接口，增加MessageBusContext参数
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="messageBus"></param>
+            <param name="handler"></param>
+            <param name="context"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
