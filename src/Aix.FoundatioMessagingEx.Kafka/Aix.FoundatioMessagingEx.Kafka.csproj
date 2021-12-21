@@ -8,8 +8,8 @@
 支持根据分组订阅
 通过Aix.KafkaMessageBus组件实现</Description>
     <RepositoryUrl>https://github.com/linzhiqiang/Aix.FoundatioEx.git</RepositoryUrl>
-    <Version>1.182.1</Version>
-    <PackageReleaseNotes>update confluent.kafka to  1.8.2</PackageReleaseNotes>
+    <Version>1.182.2</Version>
+    <PackageReleaseNotes>update Foundatio  to  10.2.5</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aix.KafkaMessageBus" Version="1.182.1" />
-    <PackageReference Include="Foundatio" Version="10.0.2" />
+    <PackageReference Include="Foundatio" Version="10.2.5" />
   </ItemGroup>
 
 </Project>
